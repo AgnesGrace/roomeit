@@ -1,0 +1,16 @@
+{
+  "name": "roomeit",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "devDependencies": {
+    "turbo": "^1.8.5"
+  },
+  "scripts": {
+    "dev": "turbo run dev --parallel"
+  }
+}

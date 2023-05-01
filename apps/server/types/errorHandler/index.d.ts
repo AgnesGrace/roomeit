@@ -1,0 +1,3 @@
+interface PrismaErrorMsg {
+  error: string
+}
