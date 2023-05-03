@@ -1,5 +1,6 @@
 import express from 'express'
 import { Server } from 'http'
+import cors from 'cors'
 import dotenv from 'dotenv'
 import router from './router'
 import ConsoleLogger from './lib/logger'
@@ -7,6 +8,12 @@ import ConsoleLogger from './lib/logger'
 dotenv.config()
 const app = express()
 app.use(express.json())
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://localhost:5173',
+  })
+)
 app.use(router)
 
 export function startServer(): Server {

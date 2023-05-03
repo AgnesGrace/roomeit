@@ -60,7 +60,6 @@ const UsersController = {
 
   // authenticated user
   async getAuthenticatedUser(req: Request, res: Response, next: NextFunction) {
-    console.log(req.user)
     try {
       res.json(req.user)
     } catch (err) {

@@ -5,10 +5,11 @@ const RoomListingsContoller = {
   async createListings(req: Request, res: Response, next: NextFunction) {
     try {
       const userId = 1
-      console.log(req.user)
       // TODO: replace with the authenticated user
+      console.log(req.body)
       const { description, type, rooms, bathrooms, price, address, images } =
         req.body
+
       const listings = await RoomListing.create(
         description,
         type,

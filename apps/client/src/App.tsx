@@ -11,10 +11,11 @@ import Signup from './routes/Signup'
 import UserProfile from './routes/UserProfile'
 import ForgotPassword from './routes/ForgotPassword'
 import About from './routes/About'
+import AddListings from './routes/AddListings'
 
 import './App.css'
 
-function App(): JSX.Element {
+const App: React.FC = () => {
   return (
     <>
       <Router>
@@ -23,6 +24,7 @@ function App(): JSX.Element {
           <Route path="/" element={<Home />} />
           <Route path="/main-roomeit" element={<MainRoomeit />} />
           <Route path="/rooms" element={<Rooms />} />
+          <Route path="/addlistings" element={<AddListings />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/about" element={<About />} />
           <Route path="/signin" element={<Signin />} />

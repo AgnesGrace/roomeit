@@ -63,6 +63,9 @@ class RoomListing {
       include: {
         user: true,
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
     })
   }
 }
