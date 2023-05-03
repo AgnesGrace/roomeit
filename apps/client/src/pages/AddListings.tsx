@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
-
+import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { Form } from '../types/customTypes'
 
-interface RoomProp {
-  addListings: (formData: Form, image: string) => Promise<void>
-}
+import RoomContext from '../context/roomListings/RoomListingsContext'
 
-const AddListings: React.FC<RoomProp> = (props) => {
-  console.log(props)
+const AddListings: React.FC = () => {
+  const navigate = useNavigate()
+  const { handleAddRoomListings } = useContext(RoomContext)
   const [formData, setFormData] = useState({
     description: '',
     type: '',
@@ -45,10 +43,17 @@ const AddListings: React.FC<RoomProp> = (props) => {
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     try {
-      console.log(formData)
-      await addListings(formData, imageUrl)
+      if (formData.description === '') {
+        toast.error('The field cannot be empty')
+        return
+      }
+      if (imageUrl === '') {
+        toast.error('Please upload an image')
+        return
+      }
+      await handleAddRoomListings(formData, imageUrl)
+      navigate('/main-roomeit')
     } catch (err) {
-      console.log(err)
       toast.error('Sorry, something went wrong')
     }
   }
@@ -92,7 +97,7 @@ const AddListings: React.FC<RoomProp> = (props) => {
               </label>
               <input
                 type="number"
-                min="0"
+                min="1"
                 placeholder="rooms"
                 value={rooms}
                 onChange={handleChange}
@@ -107,7 +112,7 @@ const AddListings: React.FC<RoomProp> = (props) => {
               <input
                 type="number"
                 placeholder="bathrooms"
-                min="0"
+                min="1"
                 name="bathrooms"
                 value={bathrooms}
                 onChange={handleChange}
@@ -120,7 +125,7 @@ const AddListings: React.FC<RoomProp> = (props) => {
               </label>
               <input
                 type="number"
-                min="0"
+                min="1"
                 placeholder="price"
                 name="price"
                 value={price}
@@ -134,7 +139,7 @@ const AddListings: React.FC<RoomProp> = (props) => {
               </label>
               <input
                 type="string"
-                placeholder="bathrooms"
+                placeholder="Address"
                 name="address"
                 value={address}
                 onChange={handleChange}

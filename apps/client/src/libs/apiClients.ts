@@ -26,6 +26,8 @@ export const addRoomListings = async (formData: Form, image: string) => {
     }
   )
   const newListings = res.data
+  console.log('response of server', newListings)
+
   if (res.status === 400) {
     throw new Error(newListings.message)
   }

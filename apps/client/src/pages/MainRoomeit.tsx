@@ -1,34 +1,21 @@
 import blue_house from '../assets/images/abruzzo.jpeg'
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 
 import { aosInit } from '../libs/aos.js'
-import RoomListings from '../components/roomListings.js'
-import Search from '../components/Search.js'
-import { getRoomListings, addRoomListings } from '../libs/apiClients'
-import AddListings from './AddListings'
-import { Form, Room } from '../types/customTypes'
+import RoomListings from '../components/RoomListings.js'
+import Search from './Search.js'
+import RoomContext from '../context/roomListings/RoomListingsContext'
 
 const MainRoomeit: React.FC = () => {
-  const [rooms, setRooms] = useState<Room[]>([])
-
-  const BASE_URL = import.meta.env.VITE_BASE_URL
+  const { getRoomListings } = useContext(RoomContext)
+  const [showSearch, setShowSearch] = useState(false)
 
   useEffect(() => {
     aosInit()
-    getRoomListings().then((listing) => {
-      setRooms(listing)
-    })
+    getRoomListings()
   }, [])
 
-  const handleAddRoomListings = async (formData: Form, image: string) => {
-    try {
-      const newListings = await addRoomListings(formData, image)
-      setRooms((rooms) => [newListings, ...rooms])
-    } catch (err) {
-      console.log(err)
-    }
-  }
   return (
     <>
       <header className="hero bg-base-200">
@@ -58,7 +45,7 @@ const MainRoomeit: React.FC = () => {
             </p>
             <div className="flex justify-between">
               <button className="btn btn-ghost">
-                <Link to="/signup">Explore</Link>
+                <Link to="/search-options">Explore</Link>
               </button>
               <button className="btn btn-ghost">
                 <Link to="/addlistings">Add Room</Link>
@@ -68,13 +55,7 @@ const MainRoomeit: React.FC = () => {
         </div>
       </header>
       <main className="mt-4 ">
-        <Search />
-        <div className="hero">
-          <RoomListings rooms={rooms} />
-        </div>
-        <div className="hero mt-8">
-          <AddListings addListings={handleAddRoomListings} />
-        </div>
+        <div className="hero">{!showSearch && <RoomListings />}</div>
       </main>
     </>
   )

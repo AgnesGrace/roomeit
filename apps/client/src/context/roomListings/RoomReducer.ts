@@ -1,4 +1,4 @@
-import { Room, RoomAction, RoomState } from '../../types/customTypes'
+import { RoomAction, RoomState } from '../../types/customTypes'
 
 const roomReducer = (state: RoomState, action: RoomAction) => {
   switch (action.type) {
@@ -7,6 +7,18 @@ const roomReducer = (state: RoomState, action: RoomAction) => {
         ...state,
         rooms: action.payload,
       }
+    // case 'GET_LISTING':
+    //   return {
+    //     ...state,
+    //     room: action.payload,
+    //   }
+    case 'ADD_LISTINGS':
+      return {
+        ...state,
+        rooms: action.payload,
+        ...state.rooms,
+      }
+
     default:
       return state
   }

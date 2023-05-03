@@ -15,5 +15,7 @@ router.get('/login', UsersController.loginUser)
 //room listings
 router.post('/roomlistings', RoomListingsContoller.createListings)
 router.get('/roomlistings', RoomListingsContoller.getAllListings)
+router.get('/roomlistings/:id', RoomListingsContoller.getUniqueListings)
+router.delete('roomlistings/:1d', RoomListingsContoller.deleteRoomListings)
 
 export default router

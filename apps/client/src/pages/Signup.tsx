@@ -17,10 +17,10 @@ const Signup: React.FC = () => {
   // // destructure the formData
   const { name, username, email, password } = formData
 
-  const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [(e.target as HTMLInputElement).name]: e.currentTarget.value,
+      [(e.target as HTMLInputElement).name]: e.target.value,
     }))
   }
   const handleFormSubmit = async (e: React.SyntheticEvent) => {

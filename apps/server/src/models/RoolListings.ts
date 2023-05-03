@@ -68,5 +68,30 @@ class RoomListing {
       },
     })
   }
+  static async findRoomById(id: number): Promise<RoomListing | null> {
+    const roomRecord = await prisma.roomListing.findUnique({
+      where: { id },
+    })
+    if (roomRecord === null) {
+      throw new Error('No listing in the database')
+    }
+    const { description, type, rooms, bathrooms, price, address, images } =
+      roomRecord
+    return new RoomListing(
+      id,
+      description,
+      type,
+      rooms,
+      bathrooms,
+      price,
+      address,
+      images
+    )
+  }
+  static async deleteListings(id: number) {
+    return await prisma.roomListing.delete({
+      where: { id },
+    })
+  }
 }
 export default RoomListing

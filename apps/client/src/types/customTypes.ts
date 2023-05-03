@@ -12,6 +12,18 @@ export type Room = {
   userId: number
   user: User
 }
+export interface RoomUnique {
+  id: number
+  createdAt: string
+  updatedAt: string
+  description: string
+  type: string
+  rooms: number
+  bathrooms: number
+  price: number
+  address: string
+  images: string[]
+}
 
 export type User = {
   id: number
@@ -21,7 +33,7 @@ export type User = {
 }
 
 export interface RoomState {
-  rooms: Room[]
+  rooms: RoomUnique
 }
 export interface RoomAction {
   type: string
@@ -29,6 +41,8 @@ export interface RoomAction {
 }
 export enum RoomActionKind {
   GETALL = 'GET_LISTINGS',
+  GETSINGLE = 'GET_LISTING',
+  ADDROOM = 'ADD_LISTINGS',
 }
 export interface Form {
   description: string
