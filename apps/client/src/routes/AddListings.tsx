@@ -4,11 +4,11 @@ import { toast } from 'react-toastify'
 import { Form } from '../types/customTypes'
 
 interface RoomProp {
-  addListings: (formData: Form, image: string) => Promise<void>
+  addListingsHandlers: (formData: Form, image: string) => Promise<void>
 }
 
-const AddListings: React.FC<RoomProp> = (props) => {
-  console.log(props)
+const AddListings: React.FC<RoomProp> = ({ addListingsHandlers }) => {
+  console.log(addListingsHandlers)
   const [formData, setFormData] = useState({
     description: '',
     type: '',
@@ -46,7 +46,7 @@ const AddListings: React.FC<RoomProp> = (props) => {
     event.preventDefault()
     try {
       console.log(formData)
-      await addListings(formData, imageUrl)
+      //await addListingsHandlers(formData, imageUrl)
     } catch (err) {
       console.log(err)
       toast.error('Sorry, something went wrong')

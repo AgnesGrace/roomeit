@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 import { aosInit } from '../libs/aos.js'
-import RoomListings from '../components/roomListings.js'
+import RoomListings from '../components/RoomListings.js'
 import Search from '../components/Search.js'
 import { getRoomListings, addRoomListings } from '../libs/apiClients'
 import AddListings from './AddListings'
@@ -29,6 +29,7 @@ const MainRoomeit: React.FC = () => {
       console.log(err)
     }
   }
+  console.log(handleAddRoomListings)
   return (
     <>
       <header className="hero bg-base-200">
@@ -73,7 +74,7 @@ const MainRoomeit: React.FC = () => {
           <RoomListings rooms={rooms} />
         </div>
         <div className="hero mt-8">
-          <AddListings addListings={handleAddRoomListings} />
+          <AddListings addListingsHandlers={handleAddRoomListings} />
         </div>
       </main>
     </>
